@@ -32,3 +32,28 @@ exports.getAll = async(req, res) => {
     }
 
 }
+exports.delete = async(req, res) => {
+
+
+    try {
+        const userData = await map.findByIdAndDelete(req.params.id);
+        if (!userData) {
+            res.status(400).json({ message: "form not found." });
+        }
+        res.status(200).json({ message: 'success' });
+    } catch (err) {
+        res.status(500).json(err)
+    }
+
+
+    
+
+}
+exports.getById = async(req, res) => {
+    try {
+        const data = await map.findById(req.params.id)
+        res.json({ data: data })
+    } catch (err) {
+        res.status(500).json(err)
+    }
+}
